@@ -12,31 +12,6 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       app_settings: {
@@ -249,25 +224,7 @@ export type Database = {
       }
     }
     Views: {
-      user_keys: {
-        Row: {
-          claim_id: string | null
-          claimed_at: string | null
-          issued_at: string | null
-          key_status: Database["public"]["Enums"]["key_status"] | null
-          key_value: string | null
-          lootlabs_task_id: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "key_claims_lootlabs_task_id_fkey"
-            columns: ["lootlabs_task_id"]
-            isOneToOne: false
-            referencedRelation: "lootlabs_tasks"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Functions: {
       claim_available_key: {
@@ -408,9 +365,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       key_status: ["available", "issued", "disabled"],
