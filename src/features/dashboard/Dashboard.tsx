@@ -47,19 +47,8 @@ export default function Dashboard() {
       .single()
 
     if (!claimError && existingClaim) {
-
-      // Try to get the key value through the user_keys view
-      const { data: userKey, error: keyError } = await supabase
-        .from('user_keys')
-        .select('key_value')
-        .single()
-
-      if (!keyError && userKey) {
-        setKeyValue(userKey.key_value)
-        setKeyStatus('key_assigned')
-      } else {
-        setKeyStatus('key_assigned')
-      }
+      setKeyValue(existingClaim.key_inventory?.key_value ?? null)
+      setKeyStatus('key_assigned')
       setLoading(false)
       return
     }
@@ -80,16 +69,12 @@ export default function Dashboard() {
         // Check if key was claimed
         const { data: taskClaim } = await supabase
           .from('key_claims')
-          .select('*')
+          .select('*, key_inventory!inner(key_value)')
           .eq('lootlabs_task_id', latestTask.id)
           .single()
 
         if (taskClaim) {
-const { data: userKey } = await supabase
-            .from('user_keys')
-            .select('key_value')
-            .single()
-          if (userKey) setKeyValue(userKey.key_value)
+          if (taskClaim.key_inventory) setKeyValue(taskClaim.key_inventory.key_value)
           setKeyStatus('key_assigned')
         } else {
           setKeyStatus('verification_pending')

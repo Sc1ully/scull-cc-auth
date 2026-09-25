@@ -42,7 +42,7 @@ export interface LootlabsTaskResponse {
 }
 
 export interface KeyClaimResponse {
-  status: 'success' | 'no_keys' | 'error'
+  status: 'success' | 'no_keys' | 'no_claim' | 'error'
   key_value?: string
   claim_id?: string
   message?: string
@@ -78,7 +78,11 @@ export async function createLootlabsTask(): Promise<LootlabsTaskResponse> {
 }
 
 export async function getKeyClaim(): Promise<KeyClaimResponse> {
-  return callFunction('claim-key', { method: 'POST' })
+  const { data: { session } } = await supabase.auth.getSession()
+  return callFunction('claim-key', {
+    method: 'POST',
+    body: JSON.stringify({ user_id: session?.user?.id }),
+  })
 }
 
 export async function getAdminKeys(

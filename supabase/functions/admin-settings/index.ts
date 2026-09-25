@@ -1,4 +1,4 @@
-import { serve } from 'https://deno.land/x/sift@0.0.7/mod.ts'
+import { serve } from 'https://deno.land/std@0.224.0/http/server.ts'
 import { createAdminClient, corsHeaders } from '../_shared/createServerSupabaseClient.ts'
 import { verifyAdmin } from '../_shared/createServerSupabaseClient.ts'
 

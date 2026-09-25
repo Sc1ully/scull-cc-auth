@@ -27,7 +27,7 @@ export interface LootlabsTask {
   lootlabs_short: string | null
   lootlabs_url: string | null
   status: 'pending' | 'completed' | 'failed'
-  created_at: string
+  created_at: string | null
   completed_at: string | null
   completion_unique_id: string | null
   completion_ip: string | null
@@ -41,6 +41,9 @@ export interface KeyClaim {
   key_id: string
   lootlabs_task_id: string | null
   claimed_at: string
+  key_inventory?: {
+    key_value: string
+  }
 }
 
 export interface KeyStatsResponse {
@@ -48,6 +51,13 @@ export interface KeyStatsResponse {
   available: number
   issued: number
   disabled: number
+}
+
+export interface LootlabsTaskResponse {
+  status: 'task_created' | 'already_claimed' | 'task_pending' | 'no_keys' | 'error'
+  message?: string
+  loot_url?: string
+  task_id?: string
 }
 
 export type KeyStatus = 'no_key' | 'task_required' | 'pending' | 'key_assigned'
