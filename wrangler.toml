@@ -1,0 +1,8 @@
+name = "scull-cc-auth"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "dist"
+
+[vars]
+VITE_SUPABASE_URL = "https://wszgkbsgwyzybtfgejsh.supabase.co"
+VITE_SUPABASE_ANON_KEY = "sb_publishable_v56oeiHLly5qtDYxUudTiw_0TYt9gi_"
+VITE_SITE_URL = "https://scull-cc-auth.pages.dev"
